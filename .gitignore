@@ -1,0 +1,11 @@
+# Secrets — kisi bhi folder mein
+.env
+.env.*
+!.env.example
+
+# Dependencies and build files
+node_modules/
+dist/
+
+# Logs
+*.log
