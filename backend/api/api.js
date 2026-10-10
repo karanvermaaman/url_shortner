@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import { fileURLToPath } from "node:url";
 import { rateLimit } from "express-rate-limit";
 import { randomBytes, scrypt, timingSafeEqual } from "node:crypto";
 import { promisify } from "node:util";
@@ -596,7 +597,11 @@ app.post("/s/:alias", accessLimiter, async (req, res) => {
     );
   }
 });
+const frontendDist = fileURLToPath(
+  new URL("../../frontend/dist/", import.meta.url)
+);
 
+app.use(express.static(frontendDist));
 app.use((req, res) => {
   res.status(404).json({ error: "Route not found." });
 });
